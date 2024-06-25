@@ -13,7 +13,7 @@ const Hero = () => {
     //     HERO
     //   </div>
     // </div>
-    <section className="bg-natural-9 overflow-x-hidden">
+    <section className="bg-natural-9 overflow-x-hidden z-10">
       <div className="max-w-screen-fit mx-auto flex items-center justify-between gap-12 px-5 lg:px-0 py-20">
         <div className="w-full flex flex-wrap justify-between items-center">
           <div className="w-[500px] flex flex-col gap-6">
@@ -29,11 +29,10 @@ const Hero = () => {
               charging keeps you listening for up to 35 hours since start.
             </p>
             <div className="flex max-w-[340px] gap-4 pt-4 pb-12">
-              {/* <Button className="bg-primary border-primary text-white hover:bg-white hover:text-primary font-medium rounded-md border-[1px] leading-[22px] text-nowrap"> */}
-              <Button className="font-medium leading-[22px] bg-primary border-[#43467F] hover:bg-white hover:text-primary outline-none">
+              <Button className="font-medium leading-[22px] bg-primary border-[1px] border-[#43467F] hover:bg-white hover:text-primary px-8">
                 Buy Now
               </Button>
-              <Button className="font-medium leading-[22px] bg-white border-primary-light text-primary-light hover:bg-primary-light hover:text-white">
+              <Button className="font-medium leading-[22px] bg-white border-[1px] border-primary-light text-primary-light hover:bg-primary-light hover:text-white px-6">
                 Learn More
               </Button>
             </div>

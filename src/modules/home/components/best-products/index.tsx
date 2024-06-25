@@ -8,6 +8,7 @@ import garminWatch from "/public/images/garmin-watch.webp"
 import yellowTurtleneck from "/public/images/yellow-turtleneck.svg"
 import speaker from "/public/images/speaker.jpg"
 import airpods from "/public/images/airpods.svg"
+import { rubik } from "app/fonts"
 
 const bestProducts = [
   {
@@ -98,7 +99,9 @@ export default function BestProducts() {
       <Divider />
       <div className="mt-24 mb-[100px] md:mb-[32]">
         <div className="text-center pb-16">
-          <h2 className="headline-h2 text-natural-1">Best Seller Products</h2>
+          <h2 className={`${rubik.className} headline-h2 text-natural-1`}>
+            Best Seller Products
+          </h2>
           <p className="text-natural-7 leading-[22px]">
             Check our best seller products on Elma website right now
           </p>

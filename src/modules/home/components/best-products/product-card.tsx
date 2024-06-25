@@ -4,6 +4,7 @@ import SvgCartComponent from "@modules/common/icons/svg-cart-component"
 import SvgEyeComponent from "@modules/common/icons/svg-eye-component"
 import heart from "/public/icons/heart.svg"
 import heartBlack from "/public/icons/heart-black.svg"
+import { Button } from "@medusajs/ui"
 
 type Product = {
   id: number
@@ -26,7 +27,7 @@ export default function ProductCard({
   imageUrl,
 }: Product) {
   return (
-    <li className="group z-0 hover:z-[1000] hover:mb-[-99px] max-w-[360px] min-w-[255px] flex flex-col gap-4 px-5 py-4 hover:shadow-lg rounded-lg bg-white">
+    <li className="group z-0 hover:z-10 hover:mb-[-99px] max-w-[360px] min-w-[255px] flex flex-col gap-4 px-5 py-4 hover:shadow-lg rounded-lg bg-white">
       <div className="flex flex-col gap-6">
         <div className="flex justify-between items-center z-0">
           {onSale ? (
@@ -63,12 +64,12 @@ export default function ProductCard({
       <div className=" pt-2">
         <div className="hidden pt-2 group-hover:relative group-hover:block">
           <div className="flex flex-col gap-2">
-            <button className="flex justify-center items-center gap-2 w-full h-full px-8 py-2 font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-primary border-primary text-white hover:bg-white  hover:text-primary hover:transition-all">
+            <Button className="w-full font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-primary border-primary text-white hover:bg-white  hover:text-primary">
               <SvgCartComponent /> Add to cart
-            </button>
-            <button className="flex justify-center items-center gap-2 w-full h-full px-8 py-2 font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-white border-natural-6 text-natural-6 hover:bg-natural-6 hover:text-white hover:transition-all">
+            </Button>
+            <Button className="w-full font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-white border-natural-6 text-natural-6 hover:bg-natural-6 hover:text-white">
               <SvgEyeComponent /> Quick view
-            </button>
+            </Button>
           </div>
         </div>
       </div>
