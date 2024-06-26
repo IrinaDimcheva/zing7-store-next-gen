@@ -12,6 +12,8 @@ import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
+import cart from "/public/icons/cart.svg"
+import Image from "next/image"
 
 const CartDropdown = ({
   cart: cartState,
@@ -82,7 +84,18 @@ const CartDropdown = ({
             className="hover:text-ui-fg-base"
             href="/cart"
             data-testid="nav-cart-link"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+            // >{`Cart (${totalItems})`}</LocalizedClientLink>
+          >
+            <div className="lg:hidden flex justify-center items-center w-[36px] h-[36px] rounded-full border-[1px] border-natural-9 relative">
+              <Image src={cart} alt="cart" width={24} height={24} />
+            </div>
+            <div className="max-lg:hidden flex justify-center items-center w-[48px] h-[48px] rounded-full border-[1px] border-natural-9">
+              <Image src={cart} alt="cart" width={24} height={24} />
+            </div>
+            <div className="bg-accent-red w-[18px] h-[18px] py-[1px] rounded-full text-center text-xs text-white right-[-2px] top-[4px] absolute">
+              {totalItems}
+            </div>
+          </LocalizedClientLink>
         </Popover.Button>
         <Transition
           show={cartDropdownOpen}

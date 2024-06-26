@@ -94,7 +94,7 @@ const products = [
 export default function Products() {
   return (
     <>
-      <section className="max-w-screen-fit mx-auto py-20 px-5 xl:px-0">
+      <section className="max-w-screen-fit mx-auto overflow-x-hidden py-20 px-5 xl:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
           {products.map((p) => (
             <ul key={p.id} className="flex flex-col gap-8 ">

@@ -11,6 +11,8 @@ import BestProducts from "@modules/home/components/best-products"
 import Promo from "@modules/home/components/promo"
 import Categories from "@modules/home/components/categories"
 import Products from "@modules/home/components/products"
+import Blog from "@modules/home/components/blog"
+import Brands from "@modules/home/components/brands"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -72,18 +74,20 @@ export default async function Home({
   }
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Hero />
       <Benefits />
       <BestProducts />
       <Promo />
       <Categories />
       <Products />
-      <div className="py-12">
+      <Blog />
+      <Brands />
+      {/* <div className="py-12">
         <ul className="flex flex-col gap-x-6">
           <FeaturedProducts collections={collections} region={region} />
         </ul>
-      </div>
-    </>
+      </div> */}
+    </div>
   )
 }
