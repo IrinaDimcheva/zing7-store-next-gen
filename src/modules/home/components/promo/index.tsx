@@ -7,8 +7,8 @@ import { rubik } from "app/fonts"
 export default function Promo() {
   return (
     <>
-      <section className="max-w-screen-fit mx-auto overflow-x-hidden">
-        <div className="!bg-accent/15 px-5 py-12 lg:py-2 rounded-lg flex flex-wrap gap-8 items-center justify-around">
+      <section className="max-w-screen-fit mx-auto overflow-x-hidden overflow-y-visible py-12">
+        <div className="!bg-accent/15 px-5 lg:py-2 rounded-lg flex flex-wrap gap-8 items-center justify-around">
           <div>
             <Image
               src={lenovo}
