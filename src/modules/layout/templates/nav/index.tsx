@@ -45,8 +45,8 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="max-lg:hidden relative h-32 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-16 text-small-regular">
+      <header className="max-lg:hidden relative h-28 mx-auto border-b duration-200 bg-white border-ui-border-base text-natural-5">
+        <nav className="max-w-screen-fit mx-auto text-ui-fg-subtle flex items-center justify-between w-full h-12">
           <ul className="flex gap-4">
             {socialLinks.map((link) => (
               <li key={link.name}>
@@ -73,7 +73,7 @@ export default async function Nav() {
         <div className="w-[1440px] mx-auto">
           <Divider />
         </div>
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-16 text-small-regular">
+        <nav className="max-w-screen-fit mx-auto text-ui-fg-subtle flex items-center justify-between w-full h-16">
           <div className="flex items-center justify-between h-full w-full">
             <LocalizedClientLink
               href="/"
