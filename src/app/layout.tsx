@@ -12,7 +12,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light">
       <body
-        className={`${roboto.className} antialiased text-[16px] leading-[20px] `}
+        className={`${roboto.className} antialiased text-[16px] leading-[20px]`}
       >
         <main className="relative">{props.children}</main>
       </body>

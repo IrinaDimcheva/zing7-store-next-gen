@@ -92,7 +92,7 @@ const CartDropdown = ({
             <div className="max-lg:hidden flex justify-center items-center w-[48px] h-[48px] rounded-full border-[1px] border-natural-9">
               <Image src={cart} alt="cart" width={24} height={24} />
             </div>
-            <div className="bg-accent-red w-[18px] h-[18px] py-[1px] rounded-full text-center text-xs text-white right-[-2px] top-[4px] absolute">
+            <div className="flex items-center justify-center bg-accent-red w-[18px] h-[18px] rounded-full text-xs text-white pt-[3px] right-[-2px] top-[4px] absolute">
               {totalItems}
             </div>
           </LocalizedClientLink>

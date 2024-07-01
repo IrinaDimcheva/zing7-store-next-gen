@@ -13,6 +13,7 @@ import Categories from "@modules/home/components/categories"
 import Products from "@modules/home/components/products"
 import Blog from "@modules/home/components/blog"
 import Brands from "@modules/home/components/brands"
+import Divider from "@modules/common/components/divider"
 
 export const metadata: Metadata = {
   title: "Medusa Next.js Starter Template",
@@ -80,14 +81,19 @@ export default async function Home({
       <BestProducts />
       <Promo />
       <Categories />
-      <Products />
+      {/* <Products /> */}
+      <>
+        <section className="max-w-screen-fit mx-auto overflow-x-hidden py-20 px-5 xl:px-0">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
+            <FeaturedProducts collections={collections} region={region} />
+          </ul>
+        </section>
+        <div className="max-w-screen-fit mx-auto py-4">
+          <Divider />
+        </div>
+      </>
       <Blog />
       <Brands />
-      {/* <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </div> */}
     </div>
   )
 }
