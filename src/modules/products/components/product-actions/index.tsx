@@ -4,7 +4,7 @@ import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
-import { useParams } from "next/navigation"
+import { redirect, useParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
@@ -14,6 +14,10 @@ import OptionSelect from "@modules/products/components/option-select"
 
 import MobileActions from "../mobile-actions"
 import ProductPrice from "../product-price"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import SvgCartComponent from "@modules/common/icons/svg-cart-component"
+import Image from "next/image"
+import down from "/public/icons/down.svg"
 
 type ProductActionsProps = {
   product: PricedProduct
@@ -35,6 +39,7 @@ export default function ProductActions({
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [quantity, setQuantity] = useState(1)
 
   const countryCode = useParams().countryCode as string
 
@@ -128,66 +133,158 @@ export default function ProductActions({
 
     await addToCart({
       variantId: variant.id,
-      quantity: 1,
+      quantity,
       countryCode,
     })
 
     setIsAdding(false)
   }
 
+  const handleIncrement = () => {
+    setQuantity((quantity) => (quantity < 10 ? quantity + 1 : 10))
+  }
+
+  const handleDecrement = () => {
+    setQuantity((quantity) => (quantity > 1 ? quantity - 1 : 1))
+  }
+
   return (
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
-        <div>
-          {product.variants.length > 1 && (
-            <div className="flex flex-col gap-y-4">
-              {(product.options || []).map((option) => {
-                return (
-                  <div key={option.id}>
-                    <OptionSelect
-                      option={option}
-                      current={options[option.id]}
-                      updateOption={updateOptions}
-                      title={option.title}
-                      data-testid="product-options"
-                      disabled={!!disabled || isAdding}
+        <div className="flex gap-6 justify-stretch">
+          <div className="flex flex-col justify-stretch gap-3">
+            <span>Quantity</span>
+            <div className="flex h-4 ">
+              <input
+                type="number"
+                min="1"
+                max="5"
+                step="1"
+                value={quantity}
+                disabled
+                className="text-center px-4 h-10"
+              />
+              <div className="flex flex-col gap-0 ml-[-24px]">
+                <button onClick={handleIncrement}>
+                  <div className="w-[20px] h-[20px]">
+                    <Image
+                      src={down}
+                      alt="+"
+                      width={20}
+                      height={20}
+                      className="rotate-180"
                     />
                   </div>
-                )
-              })}
-              <Divider />
+                </button>
+                <button onClick={handleDecrement}>
+                  <div className="w-[20px] h-[20px]">
+                    <Image src={down} alt="-" width={20} height={20} />
+                  </div>
+                </button>
+              </div>
             </div>
-          )}
+          </div>
+          <div className="w-full">
+            {product.variants.length > 1 && (
+              <div className="flex flex-col gap-y-4">
+                {(product.options || []).map((option) => {
+                  return (
+                    <div key={option.id}>
+                      <OptionSelect
+                        option={option}
+                        current={options[option.id]}
+                        updateOption={updateOptions}
+                        title={option.title}
+                        data-testid="product-options"
+                        disabled={!!disabled || isAdding}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="my-6">
+          <Divider />
         </div>
 
-        <ProductPrice product={product} variant={variant} region={region} />
+        <div className="flex justify-between">
+          <ProductPrice product={product} variant={variant} region={region} />
 
-        <Button
-          onClick={handleAddToCart}
-          disabled={!inStock || !variant || !!disabled || isAdding}
-          variant="primary"
-          className="w-full h-10"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!variant
-            ? "Select variant"
-            : !inStock
-            ? "Out of stock"
-            : "Add to cart"}
-        </Button>
-        <MobileActions
-          product={product}
-          variant={variant}
-          region={region}
-          options={options}
-          updateOptions={updateOptions}
-          inStock={inStock}
-          handleAddToCart={handleAddToCart}
-          isAdding={isAdding}
-          show={!inView}
-          optionsDisabled={!!disabled || isAdding}
-        />
+          <div className="flex gap-4">
+            <div className="flex flex-nowrap w-full">
+              <LocalizedClientLink
+                href="/cart"
+                passHref
+                onClick={handleAddToCart}
+                className="text-nowrap"
+              >
+                <Button
+                  disabled={!inStock || !variant || !!disabled || isAdding}
+                  // variant="primary"
+                  // className="w-full h-10"
+                  className="w-full h-10 text-[16px] font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-white border-primary-light text-primary-light hover:bg-primary-light hover:text-white"
+                  isLoading={isAdding}
+                  data-testid="add-product-button"
+                >
+                  {!variant
+                    ? "Select variant"
+                    : !inStock
+                    ? "Out of stock"
+                    : "Buy Now"}
+                </Button>
+                <MobileActions
+                  product={product}
+                  variant={variant}
+                  region={region}
+                  options={options}
+                  updateOptions={updateOptions}
+                  inStock={inStock}
+                  handleAddToCart={handleAddToCart}
+                  isAdding={isAdding}
+                  show={!inView}
+                  optionsDisabled={!!disabled || isAdding}
+                />
+              </LocalizedClientLink>
+            </div>
+
+            <div className="min-w-[140px] w-full">
+              <Button
+                onClick={handleAddToCart}
+                disabled={!inStock || !variant || !!disabled || isAdding}
+                // variant="primary"
+                // className="w-full h-10"
+                className="w-full h-10 text-[16px] font-medium rounded-md border-[1px] leading-[22px] text-nowrap bg-primary border-primary text-white hover:bg-white  hover:text-primary"
+                isLoading={isAdding}
+                data-testid="add-product-button"
+              >
+                {!variant ? (
+                  "Select variant"
+                ) : !inStock ? (
+                  "Out of stock"
+                ) : (
+                  <>
+                    Add to cart
+                    <SvgCartComponent />
+                  </>
+                )}
+              </Button>
+              <MobileActions
+                product={product}
+                variant={variant}
+                region={region}
+                options={options}
+                updateOptions={updateOptions}
+                inStock={inStock}
+                handleAddToCart={handleAddToCart}
+                isAdding={isAdding}
+                show={!inView}
+                optionsDisabled={!!disabled || isAdding}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

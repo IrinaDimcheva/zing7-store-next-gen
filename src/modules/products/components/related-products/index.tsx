@@ -3,7 +3,9 @@ import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 
 import { getProductsList, getRegion } from "@lib/data"
 
-import ProductPreview from "../product-preview"
+import ProductPreviewRelated from "../product-preview-related"
+import { rubik } from "app/fonts"
+import { Button } from "@medusajs/ui"
 
 type RelatedProductsProps = {
   product: PricedProduct
@@ -62,19 +64,22 @@ export default async function RelatedProducts({
 
   return (
     <div className="product-page-constraint">
-      <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
+      <div className="flex justify-between items-center text-center mb-16">
+        <h3 className={`${rubik.className} headline-h4 text-natural-1 mb-6`}>
           Related products
-        </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          You might also want to check out these products.
-        </p>
+        </h3>
+        <Button className="bg-white border-primary-light text-primary-light hover:bg-primary-light hover:text-white py-3 px-6">
+          View All
+        </Button>
       </div>
 
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
         {productPreviews.map((productPreview) => (
           <li key={productPreview.id}>
-            <ProductPreview region={region} productPreview={productPreview} />
+            <ProductPreviewRelated
+              region={region}
+              productPreview={productPreview}
+            />
           </li>
         ))}
       </ul>
